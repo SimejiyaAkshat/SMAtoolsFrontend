@@ -1,38 +1,174 @@
-.App {
-  text-align: center;
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.Profile-Img {
+  width: 80px;
+  height: auto;
+  border-radius: 50%;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.Profile-Img img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+nav {
+  width: 100%;
   display: flex;
-  flex-direction: column;
+  justify-content: space-evenly;
+  box-shadow: 0px 2px 25px 0px #000000;
+  height: 150px;
+  align-items: center;
+}
+
+nav ul {
+  display: flex;
+  list-style-type: none;
+  align-items: center;
+}
+
+nav ul a {
+  text-decoration: none;
+  color: #000000;
+}
+
+nav ul li {
+  margin: 15px;
+  font-size: 24px;
+}
+
+.container {
+  margin: 50px;
+}
+
+.website-form {
+  width: 100%;
+  display: flex;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.form-text-site {
+  width: 30%;
+  margin-right: 30px;
+  padding: 8px;
+  border: 1px solid #111111;
+  font-size: 24px;
+  border-radius: 8px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.font-submit-btn {
+  padding: 8px;
+  font-size: 24px;
+  border-radius: 8px;
+  background-color: #111111;
+  color: #ffffff;
+}
+
+.performance-container {
+  margin: 20px;
+}
+
+.grade-scores {
+  width: 80%;
+  display: flex;
+  justify-content: space-evenly;
+  margin: auto;
+}
+
+.grade-card {
+  display: flex;
+  align-items: center;
+  border: 1px solid #111111;
+  border-radius: 8px;
+
+}
+
+.grade-card h2 {
+  font-size: 88px;
+  border-right: 0.5px solid #111111;
+}
+
+.grade-card h2, .grade-card p {
+  padding: 20px;
+}
+
+.grade-card p {
+  font-size: 36px;
+}
+
+.top-issues {
+  width: 100%;
+  margin-top: 50px;
+}
+
+.issue-item {
+  width: 100%;
+  display: flex;
+  font-size: 24px;
+  justify-content: space-around;
+}
+
+.issue-item .impact {
+  padding: 5px;
+  margin-right: 15px;
+  color: #ffffff;
+}
+
+.analystics-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+}
+
+.account-title img{
+  width: 100px;
+  height: auto;
+}
+
+.an-card {
+  display: flex;
+  flex-direction: column;
+  margin: 50px;
+  align-items: center;
+  justify-content: center;
+}
+
+.first-data {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.first-data {
+  font-size: 24px;
+}
+
+.first-data span {
+  font-size: 36px;
+}
+
+.metrics {
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(2, 1fr);
+  margin-top: 50px;
+}
+
+.metrics .metrics-graph div{
+  height: 100%;
+} 
+
+.metrics-1 svg {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.metrics-1 path {
+  fill: #2a354d;
 }
