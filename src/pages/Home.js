@@ -1,87 +1,63 @@
-import React, { Component } from 'react'
+import React, {useState } from 'react'
+import FormComponent from '../components/FormComponent'
+import PerformanceDataComponent from '../components/PerformanceData'
 
-export class Home extends Component {
-  render() {
+const Home = () =>  {
+
+    const [performanceData, setPerformanceData] = useState(null);
+  
+  const handleSubmit = (websiteUrl) => {
+    fetch('http://127.0.0.1:5000/calculate_metrics', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ website_url: websiteUrl }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setPerformanceData(data);
+        console.log(data);
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+  };
     return (
       <div className='container'>
-        <form className='website-form'>
-          <input type='text' id='site-name' className='form-text-site' placeholder='Enter Site URL'></input>
+        <FormComponent onSubmit={handleSubmit} />
+        {performanceData && <PerformanceDataComponent data={performanceData} />}
 
-          <input type='submit' id='submit' className='font-submit-btn' placeholder='Submit'></input>
-        </form>
+        <div className="info-wrapper-div">
+        <div>
+          <h1>How is Percentage Calculated</h1>
 
-        <div className='performance-container'>
-          <div className='grade-scores'>
-            <div className='grade-card grade-card-1'>
-              <h2>A</h2>
+          <p>The Percentage is calculated by taking some metrices and following few steps</p><br/>
 
-              <p>Performance<br/><span>88%</span></p>
+          <h2>First the Weight for each parameters are assigned</h2>
+          <p>loading_time_weight = 30<br/>time_to_first_byte_weight = 20<br/>page_size_weight = 25<br/>number_of_requests_weight = 25</p><br/>
+          <h2>Normalize parameter values to the range of 0 to 100</h2>
+          <p>Assign assumed maximum values for each parameters</p><br/>
+          <h2>Calculate weighted average to obtain performance percentage</h2>
+          <p>Sum of each normalized values divided by 100</p>
+        </div>
 
-              <p>Structure<br/><span>75%</span></p>
-            </div>
-            <div className='grade-card grade-card-2'>
-              <p>LCP<br/><span>1.3s</span></p>
+        <div>
+          <h1>How is Grade Calculated</h1>
 
-              <p>TBT<br/><span>79ms</span></p>
+          <p>Grade is calculated on the basis of the percentage score achieved</p>  
 
-              <p>TTFB<br/><span>88ms</span></p>
-            </div>
-          </div>
-          <div className='top-issues'>
-            <div className='issues-list'>
-              <div className='issue-item'>
-                <div className='impact' style={{backgroundColor:"#ff0011"}}>Hight</div>
-
-                <div className='title'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean ex.</div>
-
-                <div className='audit'> : 500 Elements</div>
-              </div>
-
-              <div className='issue-item'>
-                <div className='impact' style={{backgroundColor:"#0000ee"}}>Medium</div>
-
-                <div className='title'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean ex.</div>
-
-                <div className='audit'> : Total size</div>
-              </div>
-
-              <div className='issue-item'>
-                <div className='impact' style={{backgroundColor:"#00ee00"}}>Low</div>
-
-                <div className='title'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean ex.</div>
-
-                <div className='audit'> : 500 Elements</div>
-              </div>
-
-              <div className='issue-item'>
-                <div className='impact' style={{backgroundColor:"#0000ee"}}>Medium</div>
-
-                <div className='title'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean ex.</div>
-
-                <div className='audit'> : Total size</div>
-              </div>
-
-              <div className='issue-item'>
-                <div className='impact' style={{backgroundColor:"#ff0011"}}>Hight</div>
-
-                <div className='title'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean ex.</div>
-
-                <div className='audit'> : 500 Elements</div>
-              </div>
-
-              <div className='issue-item'>
-                <div className='impact' style={{backgroundColor:"#0000ee"}}>Medium</div>
-
-                <div className='title'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean ex.</div>
-
-                <div className='audit'> : Total size</div>
-              </div>
-            </div>
-          </div>
+          <p>If percentage is grater than or equal to 90 Grade is A</p><br/>
+          <p>If percentage is grater than or equal to 80 Grade is B+</p><br/>
+          <p>If percentage is grater than or equal to 70 Grade is B</p><br/>
+          <p>If percentage is grater than or equal to 60 Grade is C+</p><br/>
+          <p>If percentage is grater than or equal to 50 Grade is C</p><br/>
+          <p>If percentage is grater than or equal to 40 Grade is D+</p><br/>
+          <p>If percentage is less than 40 Grade is D</p><br/>
         </div>
       </div>
+      </div>
     )
-  }
 }
 
 export default Home
